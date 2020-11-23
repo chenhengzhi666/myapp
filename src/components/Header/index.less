@@ -1,0 +1,26 @@
+.root {
+  width: 100%;
+  header {
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 30px;
+      height: 25px;
+    }
+  }
+  .title {
+    margin-left: 8px;
+    color: gold;
+    font-size: 18px;
+    line-height: 1;
+  }
+  :global {
+    .am-tabs-default-bar-tab {
+      &:after {
+        display: none!important;
+      }
+    }
+  }
+}

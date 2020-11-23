@@ -1,4 +1,3 @@
-// An highlighted block
 /**
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
@@ -42,6 +41,7 @@ const errorHandler = error => {
 
   return response;
 };
+
 const request = extend({
   errorHandler,
   // 默认错误处理
@@ -62,11 +62,6 @@ request.interceptors.request.use(async (url, options) => {
       options: { ...options, headers: headers },
     };
   } else {
-    const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'x-auth-token': c_token,
-    };
     return {
       url: url,
       options: { ...options },

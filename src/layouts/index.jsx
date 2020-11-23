@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 /**
  * 全局layout
  * @param {*props} props 
@@ -9,7 +10,7 @@ const Layout = (props) => {
     <>
       {props.children}
     </>
-  )
-}
+  );
+};
 
 export default Layout;
