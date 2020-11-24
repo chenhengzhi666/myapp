@@ -12,12 +12,22 @@
   }
   .title {
     margin-left: 8px;
-    color: gold;
+    color: @theme-color;
     font-size: 18px;
     line-height: 1;
   }
   :global {
+    .am-tabs-default-bar-underline {
+      border-color: @theme-color;
+    }
+
     .am-tabs-default-bar-tab {
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      &.am-tabs-default-bar-tab-active {
+        color: @theme-color;
+      }
       &:after {
         display: none!important;
       }

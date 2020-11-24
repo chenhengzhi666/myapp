@@ -1,56 +1,45 @@
 module.exports = {
-  env: {
-    es6: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'airbnb-base',
-    'prettier',
-    'prettier/react',
-  ],
-  parser: 'babel-eslint',
+  extends: '@whalecloud/eslint-config',
   rules: {
-    'react/prop-types': 0,
-    'react/display-name': 0,
-    'no-console': 2,
-    'no-unused-vars': [2, 'all'],
-    'import/no-unresolved': 0,
-    'import/no-extraneous-dependencies': 0,
-    semi: [2, 'always'],
-    'import/no-cycle': 0,
-    'class-methods-use-this': [
-      2,
+    'no-await-in-loop': 'off',
+    // require parens in arrow function arguments
+    // 要求箭头函数的参数使用圆括号
+    // https://eslint.org/docs/rules/arrow-parens
+    'arrow-parens': [
+      'warn',
+      'as-needed',
       {
-        exceptMethods: ['render'],
+        requireForBlockBody: true,
       },
     ],
-    'linebreak-style': ['off', 'windows'],
-  },
-  plugins: ['react', 'prettier'],
-  settings: {
-    react: {
-      createClass: 'createReactClass',
-      pragma: 'React',
-      version: '16.3.2',
-    },
-    propWrapperFunctions: ['forbidExtraProps'],
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx'],
+
+    'react/destructuring-assignment': ['error', 'always'],
+
+    // 注释块在第一行的时候，允许不空行
+    'lines-around-comment': [
+      'error',
+      { beforeBlockComment: true, allowBlockStart: true },
+    ],
+
+    'react/prefer-stateless-function': 'warn',
+
+    'no-mixed-operators': 'off',
+
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'LabeledStatement',
+        message:
+          'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
       },
-    },
+      {
+        selector: 'WithStatement',
+        message:
+          '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
+      },
+    ],
   },
   globals: {
-    window: true,
     document: true,
-    Image: true,
-    Event: true,
-    Promise: true,
-    sessionStorage: true,
-    setTimeout: true,
-    process: true,
-    console: true,
-    require: true,
   },
 };

@@ -3,8 +3,8 @@
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
 import { extend } from 'umi-request';
-import { stringify } from "query-string";
-import { notification } from 'antd';
+import { stringify } from 'query-string';
+import { Toast } from 'antd-mobile';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -27,16 +27,16 @@ const codeMessage = {
 /**
  * 异常处理程序
  */
-const errorHandler = error => {
+const errorHandler = (error) => {
   const { response } = error;
-
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
-    notification.error({
-      message: `请求错误 ${status}: ${url}`,
-      description: errorText,
-    });
+    // const { status, url } = response;
+    Toast.fail(errorText);
+    // notification.error({
+    //   message: `请求错误 ${status}: ${url}`,
+    //   description: errorText,
+    // });
   }
 
   return response;
@@ -50,28 +50,27 @@ const request = extend({
 
 // request拦截器, 改变url 或 options.
 request.interceptors.request.use(async (url, options) => {
-  let c_token = localStorage.getItem('x-auth-token');
-  if (c_token) {
+  const cToken = localStorage.getItem('x-auth-token');
+  if (cToken) {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'x-auth-token': c_token,
+      'x-auth-token': cToken,
     };
     return {
-      url: url,
-      options: { ...options, headers: headers },
-    };
-  } else {
-    return {
-      url: url,
-      options: { ...options },
+      url,
+      options: { ...options, headers },
     };
   }
+  return {
+    url,
+    options: { ...options },
+  };
 });
 
 // response拦截器, 处理response
-request.interceptors.response.use((response, options) => {
-  let token = response.headers.get('x-auth-token');
+request.interceptors.response.use((response) => {
+  const token = response.headers.get('x-auth-token');
   if (token) {
     localStorage.setItem('x-auth-token', token);
   }
@@ -80,7 +79,7 @@ request.interceptors.response.use((response, options) => {
 
 const trimURL = url => `/${url}`;
 
-const get = (url, data) => 
+const get = (url, data) =>
   request(trimURL(`${url}${data ? `?${stringify(data)}` : ''}`), {
     method: 'GET',
   });
