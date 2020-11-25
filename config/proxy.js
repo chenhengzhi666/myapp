@@ -9,6 +9,11 @@ export default {
       target: 'https://c.y.qq.com',
       changeOrigin: true,
       pathRewrite: { '^/yqq' : '' },
+    },
+    '/uyqq': {
+      target: 'https://u.y.qq.com',
+      changeOrigin: true,
+      pathRewrite: { '^/uyqq' : '' },
     }
   },
 }

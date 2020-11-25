@@ -11,6 +11,14 @@ export default {
   history: {
     type: 'hash',
   },
-  // favicon: '/logo.png',
+  favicon: './logo.png',
+  title: 'Music',
   antd: {},
+  cssLoader: {
+    localsConvention: 'camelCase'
+  },
+  dva: {
+    immer: true,
+    hmr: false,
+  },
 };

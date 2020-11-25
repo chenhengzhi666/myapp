@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'umi';
 import Carousel from '@/components/Carousel';
-import { get } from '@/utils/request';
-import { PARAM } from '@/utils/yqq/api';
+import { PARAM } from '@/utils/music/api';
 
-const Slider = () => {
-  const [slider, setSlider] = useState([]);
+const Slider = (props) => {
+  const { dispatch, recommend: { sliderList = [] } } = props;
+
+  // 获取推荐页面轮播图
   const getSlider = () => {
     const payload = {
       ...PARAM,
@@ -14,22 +16,22 @@ const Slider = () => {
       needNewCode: 1,
       _: new Date().getTime(),
     };
-    get('yqq/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg', payload).then((res) => {
-      if (res.code === 0) {
-        setSlider(res.data?.slider);
-      }
+    dispatch({
+      type: 'recommend/getSlider',
+      payload,
     });
   };
 
   useEffect(() => {
-    getSlider();
+    // 初始化时，若无轮播图数据时进行请求获取
+    if (!sliderList.length) {
+      getSlider();
+    }
   }, []);
 
-  return (
-    <div>
-      <Carousel data={slider} autoplay infinite />
-    </div>
-  );
+  return <Carousel data={sliderList} autoplay infinite height={166} autoplayInterval={8000} />;
 };
 
-export default Slider;
+export default connect(({ recommend }) => ({
+  recommend,
+}))(Slider);

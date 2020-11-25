@@ -10,7 +10,7 @@ const Layout = (props) => {
   const { children } = props;
   return (
     <>
-      <Header logoStatus={false} title="Music" />
+      <Header title="Music" />
       {children}
     </>
   );
