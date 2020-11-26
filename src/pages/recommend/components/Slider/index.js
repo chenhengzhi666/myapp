@@ -1,21 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
 import Carousel from '@/components/Carousel';
-import { PARAM } from '@/utils/music/api';
+import { getSliderPayload as payload } from '@/utils/music/api';
 
 const Slider = (props) => {
   const { dispatch, recommend: { sliderList = [] } } = props;
 
   // 获取推荐页面轮播图
   const getSlider = () => {
-    const payload = {
-      ...PARAM,
-      g_tk: 701075963,
-      uin: 0,
-      platform: 'h5',
-      needNewCode: 1,
-      _: new Date().getTime(),
-    };
     dispatch({
       type: 'recommend/getSlider',
       payload,

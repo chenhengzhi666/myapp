@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
-import { PARAM } from '@/utils/music/api';
+import LayzLoad from 'react-lazyload';
+import { getAlbumPayload as payload } from '@/utils/music/api';
 import { createAlbum } from '@/utils/music/album';
 
 import styles from './index.less';
@@ -8,17 +9,6 @@ import styles from './index.less';
 const Album = (props) => {
   const { dispatch, recommend: { albumList = [] } } = props;
   const getAlbum = () => {
-    const payload = {
-      ...PARAM,
-      g_tk: 1278911659,
-      hostUin: 0,
-      platform: 'yqq',
-      needNewCode: 0,
-      data: `{"albumlib":
-      {"method":"get_album_by_tags","param":
-      {"area":1,"company":-1,"genre":-1,"type":-1,"year":-1,"sort":2,"get_tags":1,"sin":0,"num":50,"click_albumid":0},
-      "module":"music.web_album_library"}}`,
-    };
     dispatch({
       type: 'recommend/getAlbum',
       payload,
@@ -34,14 +24,25 @@ const Album = (props) => {
   const renderAlbum = () => albumList.map((item) => {
     const album = createAlbum(item);
     return (
-      <div>{album.name}</div>
+      <div className={styles.album} key={album.mId}>
+        <div className={styles.img}>
+          <LayzLoad>
+            <img src={album.img} alt={album.name} />
+          </LayzLoad>
+        </div>
+        <div className={styles.albumInfo}>
+          <p className={styles.name}>{album.name}</p>
+          <p className={styles.singer}>{album.singer}</p>
+          <p className={styles.publicTime}>{album.publicTime}</p>
+        </div>
+      </div>
     );
   });
 
   return (
     <div className={styles.root}>
       <h1>最新专辑</h1>
-      {/* {renderAlbum()} */}
+      {renderAlbum()}
     </div>
   );
 };
