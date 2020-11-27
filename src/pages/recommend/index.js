@@ -39,22 +39,23 @@ const Recommend = (props) => {
   };
 
   return (
-    <Scroll refresh={loading} onScroll={onScroll}>
-      <PullToRefresh
-        refreshing={refreshStatus}
-        distanceToRefresh={pullToRefreshEnable ? 25 : 99999}
-        damping={30}
-        onRefresh={() => {
-          onRefresh();
-        }}
-        className={styles.root}
-      >
-        <Slider />
-        <Album />
-      </PullToRefresh>
-      {/* 下拉刷新时不使用loading组件 */}
-      <Loading status={loading && !refreshStatus} title="正在加载..." />
-    </Scroll>
+    <div className={styles.root}>
+      <Scroll refresh={loading} onScroll={onScroll}>
+        <PullToRefresh
+          refreshing={refreshStatus}
+          distanceToRefresh={pullToRefreshEnable ? 25 : 99999}
+          damping={30}
+          onRefresh={() => {
+            onRefresh();
+          }}
+        >
+          <Slider />
+          <Album />
+        </PullToRefresh>
+        {/* 下拉刷新时不使用loading组件 */}
+        <Loading status={loading && !refreshStatus} title="正在加载..." />
+      </Scroll>
+    </div>
   );
 };
 

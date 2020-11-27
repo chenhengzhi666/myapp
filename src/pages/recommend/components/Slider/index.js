@@ -21,7 +21,7 @@ const Slider = (props) => {
     }
   }, []);
 
-  return <Carousel data={sliderList} autoplay infinite height={166} autoplayInterval={8000} />;
+  return <Carousel data={sliderList} autoplay infinite autoplayInterval={8000} />;
 };
 
 export default connect(({ recommend }) => ({

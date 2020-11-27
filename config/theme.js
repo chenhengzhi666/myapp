@@ -46,4 +46,5 @@ export default {
   // default
   '@theme-color': 'gold',
   '@theme-bg-color': '#212121',
+  // '@primary-color': 'gold' // antd全局主色
 };

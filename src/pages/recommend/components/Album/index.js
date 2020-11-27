@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'umi';
+import { connect, history } from 'umi';
 import LayzLoad from 'react-lazyload';
 import { getAlbumPayload as payload } from '@/utils/music/api';
 import { createAlbum } from '@/utils/music/album';
@@ -21,10 +21,16 @@ const Album = (props) => {
     }
   }, []);
 
+  const albumDetail = (id) => {
+    history.push({
+      pathname: `/recommend/${id}`,
+    });
+  };
+
   const renderAlbum = () => albumList.map((item) => {
     const album = createAlbum(item);
     return (
-      <div className={styles.album} key={album.mId}>
+      <div className={styles.album} key={album.mId} onClick={() => albumDetail(album.mId)}>
         <div className={styles.img}>
           <LayzLoad>
             <img src={album.img} alt={album.name} />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation } from 'umi';
+import { history, useLocation } from 'umi';
 import { Tabs } from 'antd-mobile';
 import { menuList, currentPageIndex } from '@/utils/menu';
 import logoImg from '@/assets/img/logo.png';
@@ -7,7 +7,6 @@ import styles from './index.less';
 
 const Header = (props) => {
   const { logo, title } = props;
-  const history = useHistory();
   const { pathname } = useLocation();
   const [page, setPage] = useState(currentPageIndex(pathname) || 0);
 
