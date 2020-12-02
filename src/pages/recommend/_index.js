@@ -54,7 +54,7 @@ const Recommend = (props) => {
         </PullToRefresh>
       </Scroll>
       {/* 下拉刷新时不使用loading组件 */}
-      <Loading status={loading && !refreshStatus} title="正在加载..." zIndex={10} />
+      <Loading status={loading && !refreshStatus} title="正在加载..." />
     </div>
   );
 };

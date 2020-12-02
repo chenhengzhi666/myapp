@@ -1,21 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { history } from 'umi';
+import { history, connect, useParams } from 'umi';
 import Header from '@/components/Header';
 import { CSSTransition } from 'react-transition-group';
 import styles from './index.less';
 
-const Album = () => {
+const Album = (props) => {
+  const { dispatch, recommend: { albumInfo } } = props;
+  const { mId: albummid } = useParams();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    const payload = {
+      albummid,
+    };
     setShow(true);
+    dispatch({
+      type: 'recommend/albumInfo',
+      payload,
+    });
+    return () => {
+      dispatch({
+        type: 'recommend/updata/state',
+        payload: {
+          albumInfo: {},
+        },
+      });
+    };
   }, []);
 
   const goBack = () => {
     setShow(false);
     setTimeout(() => {
       history.goBack();
-    }, 295);
+    }, 275);
   };
 
   /**
@@ -30,10 +47,12 @@ const Album = () => {
   return (
     <CSSTransition appear in={show} timeout={300} classNames="album" onEntered={onEntered}>
       <div className={styles.root}>
-        <Header title="河南郑州" goBack={goBack} />
+        <Header title={albumInfo.name} goBack={goBack} />
       </div>
     </CSSTransition>
   );
 };
 
-export default Album;
+export default connect(({ recommend }) => ({
+  recommend,
+}))(Album);

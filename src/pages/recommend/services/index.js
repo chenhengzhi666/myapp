@@ -12,4 +12,6 @@ const getSlider = data => get('yqq/musichall/fcgi-bin/fcg_yqqhomepagerecommend.f
  */
 const getAlbum = data => get('uyqq/cgi-bin/musicu.fcg', data);
 
-export { getSlider, getAlbum };
+const albumInfo = data => get('yqq/v8/fcg-bin/fcg_v8_album_info_cp.fcg', data);
+
+export { getSlider, getAlbum, albumInfo };
