@@ -6,7 +6,7 @@ export default {
       pathRewrite: { '^/yapi' : '' },
     },
     '/yqq': {
-      target: 'https://c.y.qq.com',
+      target: 'http://183.192.170.186',
       changeOrigin: true,
       pathRewrite: { '^/yqq' : '' },
     },
