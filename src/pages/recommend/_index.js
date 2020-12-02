@@ -6,7 +6,7 @@ import { getSliderPayload, getAlbumPayload } from '@/utils/music/api';
 import Loading from '@/components/Loading';
 import Scroll from '@/components/Scroll';
 import Slider from './components/Slider';
-import Album from './components/Album';
+import Albums from './components/Albums';
 import styles from './index.less';
 
 const Recommend = (props) => {
@@ -50,11 +50,11 @@ const Recommend = (props) => {
           }}
         >
           <Slider />
-          <Album />
+          <Albums />
         </PullToRefresh>
-        {/* 下拉刷新时不使用loading组件 */}
-        <Loading status={loading && !refreshStatus} title="正在加载..." />
       </Scroll>
+      {/* 下拉刷新时不使用loading组件 */}
+      <Loading status={loading && !refreshStatus} title="正在加载..." zIndex={10} />
     </div>
   );
 };
