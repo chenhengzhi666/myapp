@@ -7,6 +7,7 @@ export default {
     sliderList: [],
     albumList: [],
     albumInfo: {},
+    refreshScroll: false,
   },
   effects: {
     *getSlider({ payload }, { call, put }) {
@@ -27,6 +28,13 @@ export default {
           type: 'updata/state',
           payload: {
             albumList: res.albumlib?.data?.list,
+          },
+        });
+        // 专辑数据生成后，刷新BScroll
+        yield put({
+          type: 'updata/state',
+          payload: {
+            refreshScroll: true,
           },
         });
       }

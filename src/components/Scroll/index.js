@@ -24,7 +24,7 @@ const Scroll = (props) => {
       }
 
       setScroll(newScroll);
-    } else if (!refresh) scroll.refresh();
+    } else if (refresh) scroll.refresh();
 
     return () => {
       // 解绑scroll事件

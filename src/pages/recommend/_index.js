@@ -10,7 +10,7 @@ import Albums from './components/Albums';
 import styles from './index.less';
 
 const Recommend = (props) => {
-  const { loading: { global: loading }, dispatch } = props;
+  const { loading: { global: loading }, dispatch, recommend: { refreshScroll } } = props;
   const [pullToRefreshEnable, setPushToRefreshEnable] = useState(true); // 当bScroll滚动为正值时可执行下拉刷新事件
   const [refreshStatus, setRefreshStatus] = useState(false); // 当前下拉刷新是否进行
 
@@ -40,7 +40,7 @@ const Recommend = (props) => {
 
   return (
     <div className={styles.root}>
-      <Scroll refresh={loading} onScroll={onScroll}>
+      <Scroll refresh={refreshScroll} onScroll={onScroll}>
         <PullToRefresh
           refreshing={refreshStatus}
           distanceToRefresh={pullToRefreshEnable ? 25 : 99999}
@@ -59,6 +59,7 @@ const Recommend = (props) => {
   );
 };
 
-export default connect(({ loading }) => ({
+export default connect(({ loading, recommend }) => ({
   loading,
+  recommend,
 }))(Recommend);
