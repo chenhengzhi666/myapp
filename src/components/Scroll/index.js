@@ -5,7 +5,7 @@ import { VerticalAlignTopOutlined } from '@ant-design/icons';
 import styles from './index.less';
 
 const Scroll = (props) => {
-  const { children, refresh, onScroll, backTop } = props;
+  const { children, refresh, onScroll, backTop, noHidden } = props;
   const [scroll, setScroll] = useState();
   const [backToEnable, setBackTopEnable] = useState(false);
   const scrollRef = useRef();
@@ -43,7 +43,7 @@ const Scroll = (props) => {
   };
 
   return (
-    <div className={styles.root} ref={scrollRef}>
+    <div className={styles.root} ref={scrollRef} style={!noHidden ? { overflow: 'hidden' } : {}}>
       {children}
       {backTop && (
       <CSSTransition in={backToEnable} timeout={300} classNames="backtop">

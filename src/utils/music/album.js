@@ -1,3 +1,6 @@
+import { filterSinger } from './utils';
+import { createSong } from './song';
+
 /**
  *  专辑类模型
  */
@@ -11,12 +14,6 @@ class Album {
     this.publicTime = publicTime;
   }
 }
-
-
-const filterSinger = (singers) => {
-  const singerArray = singers.map(singer => singer.singer_name);
-  return singerArray.join('/');
-};
 
 /**
 *  通过专辑列表数据创建专辑对象函数
@@ -32,6 +29,14 @@ const createAlbum = data => new Album(
 );
 
 /**
+ * 创建歌曲列表
+ * @param {*songList} data
+ */
+const createSongList = data => data.map(song => ({
+  ...createSong(song),
+}));
+
+/**
  * 通过专辑详情数据船舰专辑详情对象函数
  * @param {*data} data
  */
@@ -45,6 +50,7 @@ const createAlbumInfo = data => ({
     data.aDate,
   ),
   desc: data.desc,
+  songList: createSongList(data.list),
 });
 
 export { Album, createAlbum, createAlbumInfo, filterSinger };
