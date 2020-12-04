@@ -1,3 +1,5 @@
+import themes from '../src/utils/theme';
+const { gold: theme } = themes;
 export default {
   // 说明 描述
   '@font-size-caption-sm': '12px',
@@ -29,22 +31,10 @@ export default {
   // 失效
   '@font-color-disable': 'rgba(0, 0, 0, 0.25)',
 
-  '@color-primary': '#1577EB',
-  '@color-error': '#ff3a00',
-  '@color-success': '#0fb745',
-  '@color-warning': '#f5a623',
-
-  // 输入框底色
-  '@color-background-input': '#e2e9f3',
-  // 边框
-  '@color-border': '#eeeeee',
-  // 页面底色
-  '@color-background': '#f2f4f7',
-  // 模块底色
-  '@color-background-model': '#f3f9ff',
-
   // default
-  '@theme-color': 'gold',
-  '@theme-bg-color': '#212121',
+  '@theme-color': theme.themeColor,
+  '@theme-bg-color': theme.themeBgColor,
+  '@theme-font-color-base': theme.themeFontColorBase,
+  '@theme-font-color-caption': theme.themeFontColorCaption,
   // '@primary-color': 'gold' // antd全局主色
 };

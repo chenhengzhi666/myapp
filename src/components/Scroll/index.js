@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import BScroll from 'better-scroll';
-import PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
+import { VerticalAlignTopOutlined } from '@ant-design/icons';
 import styles from './index.less';
 
 const Scroll = (props) => {
-  const { children, refresh, onScroll } = props;
+  const { children, refresh, onScroll, backTop } = props;
   const [scroll, setScroll] = useState();
+  const [backToEnable, setBackTopEnable] = useState(false);
   const scrollRef = useRef();
   useEffect(() => {
     if (!scroll) {
@@ -16,33 +18,42 @@ const Scroll = (props) => {
         click: true,
       });
       
-      if (onScroll) {
-        // 执行滚动事件
-        newScroll.on('scroll', (position) => {
-          onScroll(position);
-        });
-      }
+      // 执行滚动事件
+      newScroll.on('scroll', (position) => {
+        if (onScroll) onScroll(position);
+        setBackTopEnable(position.y < -300);
+      });
 
       setScroll(newScroll);
     } else if (refresh) scroll.refresh();
 
     return () => {
       // 解绑scroll事件
-      if (onScroll && scroll) scroll.off('scroll');
-      setScroll(null);
+      if (scroll) {
+        setScroll(null);
+        scroll.off('scroll');
+        scroll.destroy();
+      }
     };
   }, [refresh]);
+
+  // 返回顶部
+  const BackToTop = () => {
+    scroll.scrollTo(0, 0, 300);
+  };
 
   return (
     <div className={styles.root} ref={scrollRef}>
       {children}
+      {backTop && (
+      <CSSTransition in={backToEnable} timeout={300} classNames="backtop">
+        <div className={styles.backTop} onClick={BackToTop}>
+          <VerticalAlignTopOutlined />
+        </div>
+      </CSSTransition>
+      )}
     </div>
   );
-};
-
-Scroll.propTypes = {
-  refresh: PropTypes.bool,
-  onScroll: PropTypes.func,
 };
 
 export default Scroll;

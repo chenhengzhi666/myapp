@@ -35,17 +35,8 @@ const Album = (props) => {
     }, 275);
   };
 
-  /**
-   * CSSTransition进入动画结束时执行
-   * @param {*动画对象} el
-   */
-  const onEntered = (el) => {
-    // 初始为none，防止进入时闪烁情况，动画结束置为block
-    el.style.display = 'block';
-  };
-
   return (
-    <CSSTransition appear in={show} timeout={300} classNames="album" onEntered={onEntered}>
+    <CSSTransition appear in={show} timeout={300} classNames="album">
       <div className={styles.root}>
         <Header title={albumInfo.name} goBack={goBack} />
       </div>

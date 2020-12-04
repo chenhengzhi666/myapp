@@ -1,16 +1,45 @@
+// 专辑详情动画效果
 .album-enter {
   transform: translate3d(100%, 0, 0);
-  display: block;
-  &.album-enter-active {
-    transition: transform .3s;
-    transform: translate3d(0, 0, 0);
-  }
+}
+
+.album-enter-active {
+  transition: transform .3s;
+  transform: translate3d(0, 0, 0);
+}
+
+.album-enter-done {
+  transform: translate3d(0, 0, 0);
 }
 
 .album-exit {
   transform: translate3d(0, 0, 0);
-  &.album-exit-active {
-      transition: transform .3s;
-      transform: translate3d(100%, 0, 0);
-  }
+}
+
+.album-exit-active {
+  transition: transform .3s;
+  transform: translate3d(100%, 0, 0);
+}
+
+// 返回顶部动画效果
+.backtop-enter {
+  right: -40px;
+}
+
+.backtop-enter-active {
+  transition: right .3s;
+  right: 14px;
+}
+
+.backtop-enter-done {
+  right: 14px;
+}
+
+.backtop-exit {
+  right: 14px;
+}
+
+.backtop-exit-active {
+  transition: right .3s;
+  right: -40px
 }

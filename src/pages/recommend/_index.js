@@ -40,7 +40,7 @@ const Recommend = (props) => {
 
   return (
     <div className={styles.root}>
-      <Scroll refresh={refreshScroll} onScroll={onScroll}>
+      <Scroll refresh={refreshScroll} onScroll={onScroll} backTop>
         <PullToRefresh
           refreshing={refreshStatus}
           distanceToRefresh={pullToRefreshEnable ? 25 : 99999}
