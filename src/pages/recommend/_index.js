@@ -14,9 +14,9 @@ const Recommend = (props) => {
   const [pullToRefreshEnable, setPushToRefreshEnable] = useState(true); // 当bScroll滚动为正值时可执行下拉刷新事件
   const [refreshStatus, setRefreshStatus] = useState(false); // 当前下拉刷新是否进行
 
-  const onScroll = (position) => {
+  const onScroll = ({ y }) => {
     forceCheck();
-    setPushToRefreshEnable(position.y > 0);
+    setPushToRefreshEnable(y > 0);
   };
 
   const onRefresh = () => {

@@ -34,7 +34,9 @@ export default {
   // default
   '@theme-color': theme.themeColor,
   '@theme-bg-color': theme.themeBgColor,
+  '@theme-font-color-title': theme.themeFontColorTitle,
   '@theme-font-color-base': theme.themeFontColorBase,
   '@theme-font-color-caption': theme.themeFontColorCaption,
+  '@theme-mask-color': theme.themeMaskColor,
   // '@primary-color': 'gold' // antd全局主色
 };
