@@ -47,18 +47,22 @@ const Album = (props) => {
 
   // scroll滚动时
   const onScroll = ({ y }) => {
-    if (y > 0) {
-      // 向下滚动时头部固定海报消失
-      posterFixedRef.current.style.display = 'none';
-      // 海报动画部分
-      const transform = `scale(${1 + y * 0.003}, ${1 + y * 0.003})`;
-      posterRef.current.style.webkitTransform = transform;
-      posterRef.current.style.transform = transform;
-      playAllRef.current.style.bottom = `${20 - y * 2 / 5}px`;
-    } else {
-      // 向上滚动时头部固定海报展示
-      posterFixedRef.current.style.display = 'block';
-    }
+    const newY = y > 0 ? y : 0;
+    
+    // if (y > 0) {
+    //   // 向下滚动时头部固定海报消失
+    //   posterFixedRef.current.style.display = 'none';
+    // } else {
+    //   // 向上滚动时头部固定海报展示
+    //   posterFixedRef.current.style.display = 'block';
+    // }
+    // 滚动时头部固定海报状态
+    posterFixedRef.current.style.display = newY ? 'none' : 'block';
+    // 海报动画部分
+    const transform = `scale(${1 + newY * 0.005}, ${1 + newY * 0.005})`;
+    posterRef.current.style.webkitTransform = transform;
+    posterRef.current.style.transform = transform;
+    playAllRef.current.style.bottom = `${20 - newY * 0.7}px`;
   };
 
   return (
